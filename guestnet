@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# list devices,
+# find wlan2 (change if different),
+# check if we are not connected
+STATE=$(nmcli d | grep 'wlan2' | grep 'disconnected')
+
+# $STATE is null if device is conncted, 
+# otherwise we bring up our connection
+# get uuid by running 'nmcli c'
+# passwordless sudo is not an option,
+# this needs to be run by root
+if [[ -n $STATE ]]
+then
+    nmcli c up uuid a7c7fed1-4e05-4a62-a141-f69ccd7a1bf5
+fi
